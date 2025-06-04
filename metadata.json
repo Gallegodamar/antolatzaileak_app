@@ -1,0 +1,6 @@
+{
+  "name": "Antolatzaile Esploratzailea",
+  "description": "Antolatzaileak (diskurtso-konektoreak) aztertzeko eta kontsultatzeko aplikazioa, sailkatuta, haien esanahiekin eta erabilera-adibideekin. Elementu linguistiko hauen bilaketa eta ulermena errazten du.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
