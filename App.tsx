@@ -125,9 +125,6 @@ const App: React.FC = () => {
         <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-800">
           Antolatzaile <span className="text-sky-600">Esploratzailea</span>
         </h1>
-        <p className="text-slate-500 mt-2 text-sm sm:text-base">
-          Aurkitu eta ulertu euskarazko diskurtso-konektoreak.
-        </p>
       </header>
       
       <main className="w-full max-w-5xl bg-white p-6 sm:p-10 rounded-xl shadow-2xl flex flex-col flex-grow min-h-0">
@@ -135,7 +132,7 @@ const App: React.FC = () => {
       </main>
 
       <footer className="w-full max-w-5xl mt-12 text-center text-sm text-slate-500 flex-shrink-0">
-        <p>&copy; {new Date().getFullYear()} Antolatzaile Esploratzailea. React eta Tailwind CSS-rekin sortua.</p>
+        <p>&copy; {new Date().getFullYear()} Antolatzaile Esploratzailea.</p>
       </footer>
     </div>
   );

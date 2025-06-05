@@ -53,9 +53,13 @@ const OrganizerListScreen: React.FC<OrganizerListScreenProps> = ({
       <h2 className="text-3xl sm:text-4xl font-bold text-slate-700 mb-2 text-center">
         {isShowingAll ? category : <>Mota: <span className="text-sky-600">{category}</span></>}
       </h2>
-      <p className="text-center text-slate-500 mb-8">
-        {isShowingAll ? "Arakatu eskuragarri dauden konektore guztiak." : "Arakatu kategoria honetarako eskuragarri dauden konektoreak."}
-      </p>
+      {isShowingAll && (
+         <p className="text-center text-slate-500 mb-8">
+           Arakatu eskuragarri dauden konektore guztiak.
+         </p>
+      )}
+      {!isShowingAll && <div className="mb-6"></div> /* Add some space if the paragraph is not shown */}
+
 
       {organizersToList.length === 0 ? (
          <p className="text-center text-slate-500 mt-10">Ez dago konektorerik eskuragarri.</p>
