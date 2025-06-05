@@ -120,7 +120,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-800 flex flex-col items-center p-4 sm:p-8 font-sans">
-      <header className="w-full max-w-5xl mb-8 text-center">
+      <header className="w-full max-w-5xl mb-8 text-center flex-shrink-0">
         <img src="https://picsum.photos/seed/basqueconnect/150/50" alt="Aplikazioaren Logoa" className="mx-auto mb-4 h-12 sm:h-16 rounded-md"/>
         <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-800">
           Antolatzaile <span className="text-sky-600">Esploratzailea</span>
@@ -130,11 +130,11 @@ const App: React.FC = () => {
         </p>
       </header>
       
-      <main className="w-full max-w-5xl bg-white p-6 sm:p-10 rounded-xl shadow-2xl">
+      <main className="w-full max-w-5xl bg-white p-6 sm:p-10 rounded-xl shadow-2xl flex flex-col flex-grow min-h-0">
         {renderScreen()}
       </main>
 
-      <footer className="w-full max-w-5xl mt-12 text-center text-sm text-slate-500">
+      <footer className="w-full max-w-5xl mt-12 text-center text-sm text-slate-500 flex-shrink-0">
         <p>&copy; {new Date().getFullYear()} Antolatzaile Esploratzailea. React eta Tailwind CSS-rekin sortua.</p>
       </footer>
     </div>

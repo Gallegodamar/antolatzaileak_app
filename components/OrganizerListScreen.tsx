@@ -48,7 +48,7 @@ const OrganizerListScreen: React.FC<OrganizerListScreenProps> = ({
     : `Itzuli "${topLevelCategoryName}" Azpikategorietara`;
 
   return (
-    <div className="animate-fadeIn">
+    <div className="animate-fadeIn flex flex-col flex-grow min-h-0"> {/* Ensure this container can grow and manage its children's height */}
       <BackButton onClick={onBack} text={backButtonText} />
       <h2 className="text-3xl sm:text-4xl font-bold text-slate-700 mb-2 text-center">
         {isShowingAll ? category : <>Mota: <span className="text-sky-600">{category}</span></>}
@@ -60,11 +60,11 @@ const OrganizerListScreen: React.FC<OrganizerListScreenProps> = ({
       {organizersToList.length === 0 ? (
          <p className="text-center text-slate-500 mt-10">Ez dago konektorerik eskuragarri.</p>
       ) : (
-        <div className="flex flex-col md:flex-row gap-6 lg:gap-8">
+        <div className="flex flex-col md:flex-row gap-6 lg:gap-8 flex-grow min-h-0"> {/* This area will manage list and details height */}
           {/* Left Panel: List of Organizers */}
-          <div className="md:w-2/5 lg:w-1/3">
+          <div className="md:w-2/5 lg:w-1/3 md:flex-shrink-0"> {/* Panel for the list */}
             <h3 className="text-xl font-semibold text-slate-700 mb-4">Antolatzaileak:</h3>
-            <div className="bg-white shadow-md rounded-lg max-h-[60vh] md:max-h-[calc(100vh-280px)] overflow-y-auto p-1">
+            <div className="bg-white shadow-md rounded-lg max-h-36 sm:max-h-48 md:max-h-[calc(100vh-320px)] overflow-y-auto p-1"> {/* List itself scrolls */}
               {organizersToList.map((org) => (
                 <button
                   key={org.id}
@@ -74,6 +74,7 @@ const OrganizerListScreen: React.FC<OrganizerListScreenProps> = ({
                                 ? 'bg-sky-500 text-white font-semibold shadow-sm' 
                                 : 'hover:bg-sky-100 text-slate-700'
                               }`}
+                  aria-pressed={selectedOrganizerId === org.id}
                 >
                   {org.antolatzaileak}
                 </button>
@@ -82,9 +83,9 @@ const OrganizerListScreen: React.FC<OrganizerListScreenProps> = ({
           </div>
 
           {/* Right Panel: Details of Selected Organizer */}
-          <div className="md:w-3/5 lg:w-2/3">
+          <div className="md:w-3/5 lg:w-2/3 flex-grow min-h-0"> {/* Details panel takes remaining space on mobile */}
             {selectedOrganizer ? (
-              <Card className="h-full flex flex-col animate-fadeIn">
+              <Card className="h-full flex flex-col animate-fadeIn"> {/* Card fills its panel */}
                 <h3 className="text-2xl font-bold text-sky-700 mb-1">
                   {selectedOrganizer.antolatzaileak}
                 </h3>
@@ -99,17 +100,19 @@ const OrganizerListScreen: React.FC<OrganizerListScreenProps> = ({
                   </p>
                 )}
                 <hr className="my-4 border-slate-200"/>
-                <div>
-                  <p className="text-sm font-semibold text-slate-500 mb-1">Esanahia:</p>
-                  <p className="text-slate-700 text-lg mb-4 bg-slate-50 p-3 rounded-md">{selectedOrganizer.esanahia}</p>
-                
-                  <p className="text-sm font-semibold text-slate-500 mb-1">Adibidez:</p>
-                  <p className="text-slate-700 text-lg italic bg-slate-50 p-3 rounded-md">{selectedOrganizer.adibidez}</p>
+                <div className="flex-grow overflow-y-auto min-h-0 p-1"> {/* This content area within the card scrolls */}
+                  <div>
+                    <p className="text-sm font-semibold text-slate-500 mb-1" id={`meaning-label-${selectedOrganizer.id}`}>Esanahia:</p>
+                    <p className="text-slate-700 text-lg mb-4 bg-slate-50 p-3 rounded-md" aria-labelledby={`meaning-label-${selectedOrganizer.id}`}>{selectedOrganizer.esanahia}</p>
+                  
+                    <p className="text-sm font-semibold text-slate-500 mb-1" id={`example-label-${selectedOrganizer.id}`}>Adibidez:</p>
+                    <p className="text-slate-700 text-lg italic bg-slate-50 p-3 rounded-md" aria-labelledby={`example-label-${selectedOrganizer.id}`}>{selectedOrganizer.adibidez}</p>
+                  </div>
                 </div>
               </Card>
             ) : (
               <Card className="h-full flex flex-col items-center justify-center text-center border-2 border-dashed border-slate-300">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 text-slate-400 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 text-slate-400 mb-4" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                 </svg>
                 <p className="text-slate-500 text-lg">Hautatu konektore bat zerrendatik xehetasunak ikusteko.</p>
